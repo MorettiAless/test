@@ -41,7 +41,16 @@ menu1:AddButton({
     description = Lang:t('desc.admin_options_desc')
 })
 
-RegisterKeyMapping('menu1', 'Open Menu', 'keyboard', ']')
+RegisterCommand('OpenMenu', function()
+    local PlayerData = QBCore.Functions.GetPlayerData()
+    if not MenuV.isOpen and LocalPlayer.state.isLoggedIn then
+            OpenMenu(menu1)
+        else
+            QBCore.Functions.Notify("Action not available at the moment..", "error")
+        end
+end)
+
+RegisterKeyMapping('OpenMenu', 'Open Menu', 'keyboard', 'K')
 
 --player management
 local player_management = menu1:AddButton({
